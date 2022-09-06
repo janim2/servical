@@ -6,6 +6,8 @@ class ColorConstant {
 
   static Color secondary = fromHex('#f6fcfc');
 
+  static Color grey = fromHex('#f6fbfb');
+
   static Color white = fromHex('#ffffff');
 
   static Color fromHex(String hexString) {

@@ -15,7 +15,7 @@ class SplashScreenController extends GetxController {
   startTime() async {
     var _duration = new Duration(seconds: 4);
     return new Timer(_duration, () {
-      Get.toNamed(AppRoutes.loginRoute);
+      Get.toNamed(AppRoutes.onboardingRoute);
     });
   }
 

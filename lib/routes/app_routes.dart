@@ -5,6 +5,8 @@ import 'package:servical/presentation/doctor_signup_screen/doctor_signup_screen.
 import 'package:servical/presentation/doctor_verification_screen/binding/doctor_verification_screen_binding.dart';
 import 'package:servical/presentation/doctor_verification_screen/doctor_verification_screen.dart';
 import 'package:servical/presentation/forgot_password_screen/forgot_password_screen.dart';
+import 'package:servical/presentation/onboarding_screen/binding/onboarding_screen_binding.dart';
+import 'package:servical/presentation/onboarding_screen/onboarding_screen.dart';
 import 'package:servical/presentation/signup_screen/binding/signup_screen_binding.dart';
 import 'package:servical/presentation/signup_screen/signup_screen.dart';
 
@@ -15,6 +17,12 @@ import '../presentation/splash_screen/binding/splash_screen_binding.dart';
 import '../presentation/splash_screen/splash_screen.dart';
 
 class AppRoutes {
+  //ONBOARDING
+
+  static String onboardingRoute = '/onBoardingRoute';
+
+  //AUTH & REGISTRATION
+
   static String initialRoute = '/initialRoute';
 
   static String loginRoute = '/loginRoute';
@@ -72,6 +80,13 @@ class AppRoutes {
       page: () => LoginScreen(),
       bindings: [
         LoginScreenBinding(),
+      ],
+    ),
+    GetPage(
+      name: onboardingRoute,
+      page: () => OnboardingScreen(),
+      bindings: [
+        OnBoardingScreenBinding(),
       ],
     ),
     GetPage(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 class OnboardingContents {
   final String title;
   final String image;

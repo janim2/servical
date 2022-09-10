@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:servical/presentation/doctor_info_screen/binding/doctor_info_screen_binding.dart';
+import 'package:servical/presentation/doctor_info_screen/doctor_info.dart';
 import 'package:servical/presentation/doctor_login_screen/binding/doctor_login_screen_binding.dart';
 import 'package:servical/presentation/doctor_login_screen/doctor_login_screen.dart';
 import 'package:servical/presentation/doctor_signup_screen/doctor_signup_screen.dart';
@@ -7,9 +9,19 @@ import 'package:servical/presentation/doctor_verification_screen/doctor_verifica
 import 'package:servical/presentation/forgot_password_screen/forgot_password_screen.dart';
 import 'package:servical/presentation/onboarding_screen/binding/onboarding_screen_binding.dart';
 import 'package:servical/presentation/onboarding_screen/onboarding_screen.dart';
+import 'package:servical/presentation/otp_screen/binding/otp_screen_binding.dart';
+import 'package:servical/presentation/otp_screen/otp_screen.dart';
+import 'package:servical/presentation/patient_info_screen/binding/patient_info_screen_binding.dart';
+import 'package:servical/presentation/patient_info_screen/patient_info.dart';
+import 'package:servical/presentation/reset_password_screen/binding/reset_password_screen_binding.dart';
+import 'package:servical/presentation/reset_password_screen/reset_password_screen.dart';
 import 'package:servical/presentation/signup_screen/binding/signup_screen_binding.dart';
 import 'package:servical/presentation/signup_screen/signup_screen.dart';
+import 'package:servical/presentation/user_dashboard_screen/binding/user_dashboard_screen_binding.dart';
+import 'package:servical/presentation/user_dashboard_screen/user_dashboard_screen.dart';
 
+import '../presentation/doctor_dashboard_screen/binding/doctor_dashboard_screen_binding.dart';
+import '../presentation/doctor_dashboard_screen/doctor_dashboard_screen.dart';
 import '../presentation/forgot_password_screen/binding/forgot_password_screen_binding.dart';
 import '../presentation/login_screen/binding/login_screen_binding.dart';
 import '../presentation/login_screen/login_screen.dart';
@@ -31,6 +43,10 @@ class AppRoutes {
 
   static String signupRoute = '/signupRoute';
 
+  static String otpScreenRoute = '/otpScreenRoute';
+
+  static String resetPasswordRoute = '/resetPasswordRoute';
+
   //DOCTOR
 
   static String doctorloginRoute = '/doctorloginRoute';
@@ -39,7 +55,44 @@ class AppRoutes {
 
   static String doctorVerificationRoute = '/doctorVerificationRoute';
 
+  static String doctorInfoRoute = '/doctorInfoRoute';
+
+  static String doctorDashboadRoute = '/doctorDashboardRoute';
+
+  static String patientInfoRoute = '/patientInfoRoute';
+
+  //USER
+  static String userDashboadRoute = '/userDashboardRoute';
+
   static List<GetPage> pages = [
+    GetPage(
+      name: patientInfoRoute,
+      page: () => PatientInfo(),
+      bindings: [
+        PatientInfoBinding(),
+      ],
+    ),
+    GetPage(
+      name: doctorDashboadRoute,
+      page: () => DoctorDashboardScreen(),
+      bindings: [
+        DoctorDashboardScreenBinding(),
+      ],
+    ),
+    GetPage(
+      name: doctorInfoRoute,
+      page: () => DoctorInfo(),
+      bindings: [
+        DoctorInfoBinding(),
+      ],
+    ),
+    GetPage(
+      name: userDashboadRoute,
+      page: () => UserDashboardScreen(),
+      bindings: [
+        UserDashboardScreenBinding(),
+      ],
+    ),
     GetPage(
       name: doctorVerificationRoute,
       page: () => DoctorVerificationScreen(),
@@ -66,6 +119,20 @@ class AppRoutes {
       page: () => DoctorLoginScreen(),
       bindings: [
         DoctorLoginScreenBinding(),
+      ],
+    ),
+    GetPage(
+      name: resetPasswordRoute,
+      page: () => ResetPasswordScreen(),
+      bindings: [
+        ResetPasswordScreenBinding(),
+      ],
+    ),
+    GetPage(
+      name: otpScreenRoute,
+      page: () => OTPScreen(),
+      bindings: [
+        OTPScreenBinding(),
       ],
     ),
     GetPage(

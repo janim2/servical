@@ -121,7 +121,12 @@ class LoginScreen extends GetWidget<LoginScreenController> {
                               SizedBox(
                                 height: 20,
                               ),
-                              DefaultButton(textonButton: "SignIn"),
+                              DefaultButton(
+                                textonButton: "SignIn",
+                                ontap: () {
+                                  Get.toNamed(AppRoutes.userDashboadRoute);
+                                },
+                              ),
                               Align(
                                   alignment: Alignment.centerRight,
                                   child: Padding(

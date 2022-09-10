@@ -133,7 +133,12 @@ class DoctorLoginScreen extends GetWidget<DoctorLoginScreenController> {
                               SizedBox(
                                 height: 20,
                               ),
-                              DefaultButton(textonButton: "SignIn"),
+                              DefaultButton(
+                                textonButton: "SignIn",
+                                ontap: () {
+                                  Get.toNamed(AppRoutes.doctorDashboadRoute);
+                                },
+                              ),
                               Align(
                                   alignment: Alignment.centerRight,
                                   child: Padding(

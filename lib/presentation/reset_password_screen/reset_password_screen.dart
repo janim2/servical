@@ -1,9 +1,9 @@
 import '../../widgets/button.dart';
-import 'controller/forgot_password_screen_controller.dart';
+import 'controller/reset_password_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:servical/core/app_export.dart';
 
-class ForgotPasswordScreen extends GetWidget<ForgotPasswordScreenController> {
+class ResetPasswordScreen extends GetWidget<ResetPasswordScreenController> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -32,7 +32,7 @@ class ForgotPasswordScreen extends GetWidget<ForgotPasswordScreenController> {
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              "Forgot Password",
+                              "Reset Password",
                               style: TextStyle(
                                   fontFamily: "Sora",
                                   fontSize: 20,
@@ -52,8 +52,8 @@ class ForgotPasswordScreen extends GetWidget<ForgotPasswordScreenController> {
                             children: [
                               TextField(
                                 // controller: passwordController,
-                                keyboardType: TextInputType.text,
-                                obscureText: false,
+                                keyboardType: TextInputType.visiblePassword,
+                                obscureText: true,
                                 style: TextStyle(
                                     color: ColorConstant.primary,
                                     fontFamily: "Sora",
@@ -67,19 +67,42 @@ class ForgotPasswordScreen extends GetWidget<ForgotPasswordScreenController> {
                                     ),
 
                                     // hintStyle: textfield_hint_style,
-                                    hintText: "Phone number:",
+                                    hintText: "New Password:",
                                     hintStyle: TextStyle(
                                         fontFamily: "Sora",
                                         color: ColorConstant.primary)),
                               ),
                               SizedBox(
-                                height: 15,
+                                height: 30,
+                              ),
+                              TextField(
+                                // controller: passwordController,
+                                keyboardType: TextInputType.visiblePassword,
+                                obscureText: true,
+                                style: TextStyle(
+                                    color: ColorConstant.primary,
+                                    fontFamily: "Sora",
+                                    fontSize: 16),
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.all(20.0),
+                                    border: const OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(50.0),
+                                      ),
+                                    ),
+
+                                    // hintStyle: textfield_hint_style,
+                                    hintText: "Confirm New Password:",
+                                    hintStyle: TextStyle(
+                                        fontFamily: "Sora",
+                                        color: ColorConstant.primary)),
+                              ),
+                              SizedBox(
+                                height: 30,
                               ),
                               DefaultButton(
-                                textonButton: "Submit",
-                                ontap: () {
-                                  Get.toNamed(AppRoutes.otpScreenRoute);
-                                },
+                                textonButton: "Continue",
+                                ontap: () {},
                               ),
                             ],
                           ))

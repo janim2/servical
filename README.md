@@ -17,7 +17,7 @@ A mobile app for servical cancer patients.
 # doctor
 
 <img src="screenshots/doc1.png" width="30%">&emsp;<img src="screenshots/doc2.png" width="30%">
-<img src="screenshots/doc3.png" width="30%">&emsp;
+<img src="screenshots/doc3.png" width="30%">&emsp;<img src="screenshots/doc4.png" width="30%">
 
 ## :file_folder: Repo Walkthrough
 

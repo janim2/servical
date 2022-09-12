@@ -153,8 +153,12 @@ class _PatientInfoState extends State<PatientInfo> {
                       ],
                     ))),
                 Notes(
-                    text:
-                        "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without ..."),
+                  text:
+                      "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without ...",
+                  ontap: () {
+                    Get.toNamed(AppRoutes.patientNotesRoute);
+                  },
+                ),
                 Notes(
                     text:
                         "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface  ...")

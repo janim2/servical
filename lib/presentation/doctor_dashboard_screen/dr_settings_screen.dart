@@ -5,14 +5,14 @@ import 'package:servical/widgets/button.dart';
 
 import '../../core/app_export.dart';
 
-class UserSettings extends StatefulWidget {
-  const UserSettings({Key? key}) : super(key: key);
+class DocSettings extends StatefulWidget {
+  const DocSettings({Key? key}) : super(key: key);
 
   @override
-  State<UserSettings> createState() => _UserSettingsState();
+  State<DocSettings> createState() => _DocSettingsState();
 }
 
-class _UserSettingsState extends State<UserSettings> {
+class _DocSettingsState extends State<DocSettings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,30 +33,40 @@ class _UserSettingsState extends State<UserSettings> {
                       // fit: BoxFit.contain,
                       width: size.width,
                     ),
-                    Icon(Icons.arrow_circle_left_outlined),
+                    Image.asset(
+                      "assets/images/doc.png",
+                      // fit: BoxFit.contain,
+                      width: size.width,
+                    ),
                     Container(
-                      margin: EdgeInsets.only(left: 40),
+                      // margin: EdgeInsets.only(left: 40),
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 30.0, top: 110.0),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Settings",
-                            style: TextStyle(
-                                fontFamily: "Sora",
-                                fontSize: 30,
-                                color: ColorConstant.white),
-                          ),
+                        padding: const EdgeInsets.only(top: 25.0),
+                        child: Column(
+                          children: [
+                            Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Settings",
+                                style: TextStyle(
+                                    fontFamily: "Sora",
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                    color: ColorConstant.white),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
                   ],
                 ),
+                SizedBox(height: 50,),
                 Container(
                   margin: EdgeInsets.all(20),
                   child: Column(
                     children: [
-                      BoardedButton(textonButton: "Recent Appointments"),
+                      // BoardedButton(textonButton: "Recent Appointments"),
                       SizedBox(
                         height: 30,
                       ),

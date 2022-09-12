@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:servical/widgets/appointments.dart';
 
@@ -12,6 +13,8 @@ class DoctorHome extends StatefulWidget {
 }
 
 class _DoctorHomeState extends State<DoctorHome> {
+  var status = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,16 +44,20 @@ class _DoctorHomeState extends State<DoctorHome> {
                       // margin: EdgeInsets.only(left: 40),
                       child: Padding(
                         padding: const EdgeInsets.only(top: 25.0),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            "Home",
-                            style: TextStyle(
-                                fontFamily: "Sora",
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                                color: ColorConstant.white),
-                          ),
+                        child: Column(
+                          children: [
+                            Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Home",
+                                style: TextStyle(
+                                    fontFamily: "Sora",
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                    color: ColorConstant.white),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -60,18 +67,38 @@ class _DoctorHomeState extends State<DoctorHome> {
                   height: 30,
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: 40),
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 30.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Appointments",
-                        style: TextStyle(
-                            fontFamily: "Sora",
-                            fontSize: 25,
-                            color: ColorConstant.primary),
-                      ),
+                    padding: const EdgeInsets.only(left: 0.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Appointments",
+                            style: TextStyle(
+                                fontFamily: "Sora",
+                                fontSize: 25,
+                                color: ColorConstant.primary),
+                          ),
+                        ),
+                        FlutterSwitch(
+                          width: 100.0,
+                          height: 40.0,
+                          valueFontSize: 20.0,
+                          toggleSize: 45.0,
+                          value: status,
+                          borderRadius: 30.0,
+                          padding: 8.0,
+                          activeColor: ColorConstant.primary,
+                          showOnOff: true,
+                          onToggle: (val) {
+                            setState(() {
+                              status = val;
+                            });
+                          },
+                        ),
+                      ],
                     ),
                   ),
                 ),

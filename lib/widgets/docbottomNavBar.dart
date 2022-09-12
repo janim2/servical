@@ -12,6 +12,7 @@ import 'package:servical/presentation/user_dashboard_screen/news_screen.dart';
 import 'package:servical/presentation/user_dashboard_screen/settings_screen.dart';
 import 'package:servical/presentation/user_dashboard_screen/user_dashboard_screen.dart';
 
+import '../presentation/doctor_dashboard_screen/dr_settings_screen.dart';
 import '../presentation/doctor_dashboard_screen/home_screen.dart';
 
 class DocBottomNavBar extends StatefulWidget {
@@ -31,11 +32,11 @@ class _DocBottomNavBarState extends State<DocBottomNavBar> {
         return DoctorHome();
       case 1:
         return Patients();
-      case 2:
-        return UserNews();
+      // case 2:
+      //   return UserNews();
 
       default:
-        return UserSettings();
+        return DocSettings();
     }
   }
 
@@ -116,39 +117,39 @@ class _DocBottomNavBarState extends State<DocBottomNavBar> {
                   ),
                 ),
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: MaterialButton(
-                  onPressed: () {
-                    setState(() {
-                      currentTab = 2;
-                    });
-                  },
-                  minWidth: 40,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.speaker_phone,
-                          size: 35,
-                          color: currentTab == 2
-                              ? ColorConstant.primary
-                              : Colors.grey),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        'News',
-                        style: TextStyle(
-                            color: currentTab == 2
-                                ? ColorConstant.primary
-                                : Colors.grey,
-                            fontSize: 12,
-                            fontFamily: "Sora"),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              // ClipRRect(
+              //   borderRadius: BorderRadius.circular(100),
+              //   child: MaterialButton(
+              //     onPressed: () {
+              //       setState(() {
+              //         currentTab = 2;
+              //       });
+              //     },
+              //     minWidth: 40,
+              //     child: Column(
+              //       mainAxisAlignment: MainAxisAlignment.center,
+              //       children: [
+              //         Icon(Icons.speaker_phone,
+              //             size: 35,
+              //             color: currentTab == 2
+              //                 ? ColorConstant.primary
+              //                 : Colors.grey),
+              //         const SizedBox(
+              //           height: 5,
+              //         ),
+              //         Text(
+              //           'News',
+              //           style: TextStyle(
+              //               color: currentTab == 2
+              //                   ? ColorConstant.primary
+              //                   : Colors.grey,
+              //               fontSize: 12,
+              //               fontFamily: "Sora"),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
               ClipRRect(
                 borderRadius: BorderRadius.circular(100),
                 child: MaterialButton(

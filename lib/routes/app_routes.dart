@@ -13,6 +13,8 @@ import 'package:servical/presentation/otp_screen/binding/otp_screen_binding.dart
 import 'package:servical/presentation/otp_screen/otp_screen.dart';
 import 'package:servical/presentation/patient_info_screen/binding/patient_info_screen_binding.dart';
 import 'package:servical/presentation/patient_info_screen/patient_info.dart';
+import 'package:servical/presentation/patient_notes_screen/binding/patient_notes_screen_binding.dart';
+import 'package:servical/presentation/patient_notes_screen/patients_notes_screen.dart';
 import 'package:servical/presentation/reset_password_screen/binding/reset_password_screen_binding.dart';
 import 'package:servical/presentation/reset_password_screen/reset_password_screen.dart';
 import 'package:servical/presentation/signup_screen/binding/signup_screen_binding.dart';
@@ -61,10 +63,19 @@ class AppRoutes {
 
   static String patientInfoRoute = '/patientInfoRoute';
 
+  static String patientNotesRoute = '/patientNotesRoute';
+
   //USER
   static String userDashboadRoute = '/userDashboardRoute';
 
   static List<GetPage> pages = [
+    GetPage(
+      name: patientNotesRoute,
+      page: () => PatientsNotes(),
+      bindings: [
+        PatientNotesBinding(),
+      ],
+    ),
     GetPage(
       name: patientInfoRoute,
       page: () => PatientInfo(),

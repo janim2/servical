@@ -65,7 +65,7 @@ Future FetchUserDetails(BuildContext context, String user_id) async {
     prefs.setString("hasLoggedin", "true");
     prefs.setString("userType", "user");
 
-    Get.offAndToNamed(AppRoutes.userDashboadRoute);
+    Get.offNamedUntil(AppRoutes.userDashboadRoute, (route) => false);
     showToast("Welcome to Servical");
   });
 }

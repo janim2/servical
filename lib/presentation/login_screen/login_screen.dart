@@ -207,7 +207,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                               passwordTextEdittingController
                                                   .text,
                                         );
-                                        print(reg);
                                         if (reg != null) {
                                           stopSpinner();
                                           showAlert(

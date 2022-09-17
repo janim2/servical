@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "410232332247",
+    "project_id": "servical-7b1a3",
+    "storage_bucket": "servical-7b1a3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410232332247:android:2049ef1f39236fa5fd7592",
+        "android_client_info": {
+          "package_name": "com.example.servical"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "410232332247-nbm7bbvo0s100c43upujp62argfk236c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.servical",
+            "certificate_hash": "f3d0da2fd985abc3cfe51ea3f4f5789a47f67f35"
+          }
+        },
+        {
+          "client_id": "410232332247-okt23iaf882sec0fkadb1kgmje4di38p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHDYATtbPV1r-3-GUQikgzov7T_JQjKPc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "410232332247-okt23iaf882sec0fkadb1kgmje4di38p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:servical/core/services/SharedPreferences.dart';
 import 'package:servical/presentation/onboarding_screen/onboarding_contents.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/app_export.dart';
 
@@ -115,6 +117,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           padding: const EdgeInsets.all(30),
                           child: ElevatedButton(
                             onPressed: () {
+                              addStringToSF("hasOnboarded", "true");
                               Get.toNamed(AppRoutes.loginRoute);
                             },
                             child: Text("START"),

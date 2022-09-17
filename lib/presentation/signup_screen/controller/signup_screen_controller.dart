@@ -1,9 +1,22 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 import 'package:servical/presentation/splash_screen/models/splash_model.dart';
 
 class SignUpScreenController extends GetxController {
+  bool isloading = false;
+
+  void isLoading() {
+    isloading = true;
+    update();
+  }
+
+  void isNotLoading() {
+    isloading = false;
+    update();
+  }
 
   @override
   void onReady() {

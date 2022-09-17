@@ -23,6 +23,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController usernametextEdittingController =
       TextEditingController();
   TextEditingController emailtextEdittingController = TextEditingController();
+  TextEditingController phonetextEdittingController = TextEditingController();
+
   TextEditingController passwordTextEdittingController =
       TextEditingController();
   TextEditingController confirmPasswordtextEdittingController =
@@ -165,6 +167,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     height: 30,
                                   ),
                                   TextFormField(
+                                    controller: phonetextEdittingController,
+                                    keyboardType: TextInputType.phone,
+                                    obscureText: false,
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'Phone required';
+                                      }
+                                    },
+                                    style: TextStyle(
+                                        color: ColorConstant.primary,
+                                        fontFamily: "Sora",
+                                        fontSize: 16),
+                                    decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.all(20.0),
+                                        border: const OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(50.0),
+                                          ),
+                                        ),
+
+                                        // hintStyle: textfield_hint_style,
+                                        hintText: "Phone Number:",
+                                        hintStyle: TextStyle(
+                                            fontFamily: "Sora",
+                                            color: ColorConstant.primary)),
+                                  ),
+                                  SizedBox(
+                                    height: 30,
+                                  ),
+                                  TextFormField(
                                     controller: passwordTextEdittingController,
                                     keyboardType: TextInputType.visiblePassword,
                                     obscureText: _isVisible ? false : true,
@@ -265,6 +297,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             password:
                                                 passwordTextEdittingController
                                                     .text,
+                                            phone: phonetextEdittingController
+                                                .text,
                                             username:
                                                 usernametextEdittingController
                                                     .text);

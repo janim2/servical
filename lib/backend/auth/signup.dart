@@ -9,7 +9,8 @@ import '../../core/app_export.dart';
 Future<String?> SignUp(BuildContext context,
     {required String username,
     required String email,
-    required String password}) async {
+    required String password,
+    required String phone}) async {
   String errorMessage = "";
   String user_id = "";
 
@@ -19,7 +20,7 @@ Future<String?> SignUp(BuildContext context,
 
     user_id = result.user!.uid;
 
-    var userAdd = await addUser("", user_id, username, email, password);
+    var userAdd = await addUser("", user_id, username, email, password, phone);
   } on FirebaseAuthException catch (e) {
     switch (e.code) {
       case "invalid-email":
@@ -48,7 +49,7 @@ Future<String?> SignUp(BuildContext context,
 }
 
 addUser(String profile_image, String user_id, String username, String email,
-    String password) async {
+    String password, String phone) async {
   DocumentReference documentReferencer =
       FirebaseFirestore.instance.collection("users").doc(user_id);
 
@@ -56,6 +57,7 @@ addUser(String profile_image, String user_id, String username, String email,
     "image": profile_image.isEmpty ? "" : profile_image,
     "user_id": user_id,
     "username": username,
+    "phone": phone,
     "email": email,
   };
 

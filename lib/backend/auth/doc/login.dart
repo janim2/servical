@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:servical/widgets/toast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../core/app_export.dart';
+import '../../../core/app_export.dart';
+import '../../../routes/app_routes.dart';
 
-Future<String?> Login(BuildContext context,
+Future<String?> DrLogin(BuildContext context,
     {required String email, required String password}) async {
   String errorMessage = "";
   String user_id = "";
@@ -16,7 +17,7 @@ Future<String?> Login(BuildContext context,
     UserCredential result = await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password);
     assert(result != null);
-    final User? currentUser = FirebaseAuth.instance.currentUser;
+    final User? currentUser = await FirebaseAuth.instance.currentUser;
     user_id = currentUser!.uid;
 
     //fetch user details
@@ -49,34 +50,38 @@ Future<String?> Login(BuildContext context,
 }
 
 Future FetchUserDetails(BuildContext context, String user_id) async {
-  print(user_id);
   await FirebaseFirestore.instance
-      .collection('users')
+      .collection('doctors')
       .doc(user_id)
       .get()
       .then((DocumentSnapshot documentSnapshot) async {
-    print(documentSnapshot.data().toString());
+    // print(documentSnapshot.data().toString());
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    //save to shared preference
-    print("USRT" + documentSnapshot.get("user_type"));
-    if (documentSnapshot.get("user_type") != "user") {
-      return "You are not a registered user";
+
+    if (documentSnapshot.get("user_type") != "doctor") {
+      return "You are not a registered doctor";
+    } else if (documentSnapshot.get("user_type") == "doctor" &&
+        documentSnapshot.get("isVerified") == 0) {
+      saveToPrefs(prefs, documentSnapshot);
+      Get.offNamedUntil(AppRoutes.doctorNotVerifiedRoute, (route) => false);
     } else {
       saveToPrefs(prefs, documentSnapshot);
-      Get.offNamedUntil(AppRoutes.userDashboadRoute, (route) => false);
+      Get.offNamedUntil(AppRoutes.doctorDashboadRoute, (route) => false);
       showToast("Welcome to Servical");
     }
   });
 }
 
 saveToPrefs(SharedPreferences prefs, DocumentSnapshot documentSnapshot) {
+  //save to shared preference
   prefs.setString("hasLoggedin", "true");
 
   prefs.setString("profile_image", documentSnapshot.get("image"));
-  prefs.setString("username", documentSnapshot.get("username"));
+  prefs.setString("name", documentSnapshot.get("fullname"));
   prefs.setString("user_id", documentSnapshot.get("user_id"));
-  prefs.setString("email", documentSnapshot.get("email"));
   prefs.setString("phonenumber", documentSnapshot.get("phone"));
+  prefs.setString("hospital", documentSnapshot.get("hospital"));
 
+  prefs.setString("isVerified", documentSnapshot.get("isVerified").toString());
   prefs.setString("userType", documentSnapshot.get("user_type"));
 }

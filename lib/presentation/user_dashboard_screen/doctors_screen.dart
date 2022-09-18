@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:servical/widgets/chats.dart';
@@ -54,22 +55,54 @@ class _UserDoctorsState extends State<UserDoctors> {
                   margin: EdgeInsets.only(left: 30, right: 30),
                   child: Column(
                     children: [
-                      Chats(
-                        image: "assets/images/doctor.png",
-                        drname: "Jesse Anim",
-                        hospital_name: "Aponfo Anokye Hospital",
-                        ontap: () {
-                          Get.toNamed(AppRoutes.doctorInfoRoute);
-                        },
-                      ),
-                      Chats(
-                          image: "assets/images/doctor.png",
-                          drname: "Jesse Anim",
-                          hospital_name: "Aponfo Anokye Hospital"),
-                      Chats(
-                          image: "assets/images/doctor.png",
-                          drname: "Jesse Anim",
-                          hospital_name: "Aponfo Anokye Hospital"),
+                      StreamBuilder(
+                          stream: FirebaseFirestore.instance
+                              .collection("doctors")
+                              .snapshots(),
+                          builder: (builder,
+                              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                                  snapshots) {
+                            var dataRef = snapshots.data;
+
+                            if (snapshots.hasError) {
+                              return Text('Something went wrong');
+                            }
+
+                            if (snapshots.connectionState ==
+                                ConnectionState.waiting) {
+                              return Text(
+                                "Loading",
+                                style:
+                                    TextStyle(fontFamily: "Sora", fontSize: 15),
+                              );
+                            }
+
+                            if (snapshots.data!.docs.length == 0) {
+                              return Text("No available doctors",
+                                  style: TextStyle(
+                                      fontFamily: "Sora", fontSize: 18));
+                            }
+
+                            return Column(
+                              children: [
+                                for (int k = 0;
+                                    k <= snapshots.data!.docs.length - 1;
+                                    k++)
+                                  if (dataRef?.docs[k]['isAvailable'] == 1)
+                                    Container(
+                                      child: Chats(
+                                        image: "assets/images/doctor.png",
+                                        drname: "Jesse Anim",
+                                        hospital_name: "Aponfo Anokye Hospital",
+                                        ontap: () {
+                                          Get.toNamed(
+                                              AppRoutes.doctorInfoRoute);
+                                        },
+                                      ),
+                                    ),
+                              ],
+                            );
+                          }),
                     ],
                   ),
                 ),

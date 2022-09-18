@@ -2,15 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:servical/routes/app_routes.dart';
 import 'package:servical/widgets/toast.dart';
 
-import '../../core/app_export.dart';
+import '../../../core/app_export.dart';
 
-Future<String?> SignUp(BuildContext context,
-    {required String username,
-    required String email,
+Future<String?> DrSignUp(BuildContext context,
+    {required String email,
     required String password,
-    required String phone}) async {
+    required String phone,
+    required String name,
+    required String hospital_name,
+    required String verification_no}) async {
   String errorMessage = "";
   String user_id = "";
 
@@ -20,7 +23,8 @@ Future<String?> SignUp(BuildContext context,
 
     user_id = result.user!.uid;
 
-    var userAdd = await addUser("", user_id, username, email, password, phone);
+    var userAdd = await addUser("", user_id, hospital_name, email, password,
+        phone, name, verification_no);
   } on FirebaseAuthException catch (e) {
     switch (e.code) {
       case "invalid-email":
@@ -48,17 +52,28 @@ Future<String?> SignUp(BuildContext context,
   }
 }
 
-addUser(String profile_image, String user_id, String username, String email,
-    String password, String phone) async {
+addUser(
+    String profile_image,
+    String user_id,
+    String hospital_name,
+    String email,
+    String password,
+    String phone,
+    String name,
+    String verification_no) async {
   DocumentReference documentReferencer =
-      FirebaseFirestore.instance.collection("users").doc(user_id);
+      FirebaseFirestore.instance.collection("doctors").doc(user_id);
 
   Map<String, dynamic> data = <String, dynamic>{
     "image": profile_image.isEmpty ? "" : profile_image,
     "user_id": user_id,
-    "username": username,
+    "hospital": hospital_name,
+    "fullname": name,
+    "user_type": "doctor",
+    "verification_no": verification_no,
+    "isVerified": 0,
+    "isAvailable": 0,
     "phone": phone,
-    "user_type": "user",
     "email": email,
   };
 
@@ -70,5 +85,5 @@ addUser(String profile_image, String user_id, String username, String email,
 
 success() {
   showToast("Sign In to Continue");
-  Get.toNamed(AppRoutes.loginRoute);
+  Get.offNamedUntil(AppRoutes.doctorloginRoute, (route) => false);
 }

@@ -3,6 +3,8 @@ import 'package:servical/presentation/doctor_info_screen/binding/doctor_info_scr
 import 'package:servical/presentation/doctor_info_screen/doctor_info.dart';
 import 'package:servical/presentation/doctor_login_screen/binding/doctor_login_screen_binding.dart';
 import 'package:servical/presentation/doctor_login_screen/doctor_login_screen.dart';
+import 'package:servical/presentation/doctor_not_verified_screen/binding/doctor_not_verified_screen_binding.dart';
+import 'package:servical/presentation/doctor_not_verified_screen/doctor_not_verified_screen.dart';
 import 'package:servical/presentation/doctor_signup_screen/doctor_signup_screen.dart';
 import 'package:servical/presentation/doctor_verification_screen/binding/doctor_verification_screen_binding.dart';
 import 'package:servical/presentation/doctor_verification_screen/doctor_verification_screen.dart';
@@ -57,6 +59,8 @@ class AppRoutes {
 
   static String doctorVerificationRoute = '/doctorVerificationRoute';
 
+  static String doctorNotVerifiedRoute = '/doctorNotVerifiedRoute';
+
   static String doctorInfoRoute = '/doctorInfoRoute';
 
   static String doctorDashboadRoute = '/doctorDashboardRoute';
@@ -88,6 +92,13 @@ class AppRoutes {
       page: () => DoctorDashboardScreen(),
       bindings: [
         DoctorDashboardScreenBinding(),
+      ],
+    ),
+    GetPage(
+      name: doctorNotVerifiedRoute,
+      page: () => DoctorNotVerifiedScreen(),
+      bindings: [
+        DoctorNotVerifiedScreenBinding(),
       ],
     ),
     GetPage(

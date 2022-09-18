@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:servical/widgets/appointments.dart';
 
 import '../../core/app_export.dart';
+import '../../widgets/chats.dart';
 
 class UserHome extends StatefulWidget {
   const UserHome({Key? key}) : super(key: key);
@@ -12,6 +15,8 @@ class UserHome extends StatefulWidget {
 }
 
 class _UserHomeState extends State<UserHome> {
+  final User? currentUser = FirebaseAuth.instance.currentUser;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,10 +71,51 @@ class _UserHomeState extends State<UserHome> {
                     ),
                   ),
                 ),
-                Appointments(
-                    image: "assets/images/doctor.png",
-                    drname: "Dr. John Doe",
-                    purpose_of_appointment: "Breast Examination")
+                StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection("apointments")
+                        .snapshots(),
+                    builder: (builder,
+                        AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                            snapshots) {
+                      var dataRef = snapshots.data;
+
+                      if (snapshots.hasError) {
+                        return Text('Something went wrong');
+                      }
+
+                      if (snapshots.connectionState ==
+                          ConnectionState.waiting) {
+                        return Text(
+                          "Loading",
+                          style: TextStyle(fontFamily: "Sora", fontSize: 15),
+                        );
+                      }
+
+                      if (snapshots.data!.docs.length == 0) {
+                        return Padding(
+                          padding: const EdgeInsets.all(29.0),
+                          child: Text("No appointments",
+                              style: TextStyle(fontFamily: "Sora", fontSize: 18)),
+                        );
+                      }
+
+                      return Column(
+                        children: [
+                          for (int k = 0;
+                              k <= snapshots.data!.docs.length - 1;
+                              k++)
+                            if (dataRef?.docs[k]['user_id'] ==
+                                currentUser!.uid.toString())
+                              Container(
+                                  child: Appointments(
+                                      image: "assets/images/doctor.png",
+                                      drname: "Dr. John Doe",
+                                      purpose_of_appointment:
+                                          "Breast Examination")),
+                        ],
+                      );
+                    }),
               ],
             ),
           ),

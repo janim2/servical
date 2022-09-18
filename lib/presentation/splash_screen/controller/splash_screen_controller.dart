@@ -26,11 +26,11 @@ class SplashScreenController extends GetxController {
     var isVerified = prefs.getString("isVerified");
     var user_id = prefs.getString("user_id");
 
-    // print(hasOnboarded);
-    // print(hasLogedin);
-    // print(userType);
-    // print(isVerified);
-    // print(user_id);
+    print(hasOnboarded);
+    print(hasLogedin);
+    print(userType);
+    print(isVerified);
+    print(user_id);
 
     var _duration = new Duration(seconds: 4);
     return Timer(_duration, () {
@@ -44,8 +44,7 @@ class SplashScreenController extends GetxController {
         Get.toNamed(AppRoutes.userDashboadRoute);
       } else if (hasOnboarded == "true" &&
           hasLogedin == "true" &&
-          userType == "doctor" &&
-          isVerified == "0") {
+          userType == "doctor") {
         //CHECK IF DOC IS VERIFIED
         FetchDocDetails(user_id.toString());
       }
@@ -63,8 +62,6 @@ class SplashScreenController extends GetxController {
   }
 
   Future FetchDocDetails(String user_id) async {
-    print("fetching");
-
     await FirebaseFirestore.instance
         .collection('doctors')
         .doc(user_id)

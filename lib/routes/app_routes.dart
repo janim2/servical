@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:servical/presentation/about_screen/about_screen.dart';
+import 'package:servical/presentation/about_screen/binding/about_screen_binding.dart';
 import 'package:servical/presentation/doctor_info_screen/binding/doctor_info_screen_binding.dart';
 import 'package:servical/presentation/doctor_info_screen/doctor_info.dart';
 import 'package:servical/presentation/doctor_login_screen/binding/doctor_login_screen_binding.dart';
@@ -17,12 +19,16 @@ import 'package:servical/presentation/patient_info_screen/binding/patient_info_s
 import 'package:servical/presentation/patient_info_screen/patient_info.dart';
 import 'package:servical/presentation/patient_notes_screen/binding/patient_notes_screen_binding.dart';
 import 'package:servical/presentation/patient_notes_screen/patients_notes_screen.dart';
+import 'package:servical/presentation/profile_screen/binding/profile_screen_binding.dart';
+import 'package:servical/presentation/profile_screen/profile_screen.dart';
 import 'package:servical/presentation/reset_password_screen/binding/reset_password_screen_binding.dart';
 import 'package:servical/presentation/reset_password_screen/reset_password_screen.dart';
 import 'package:servical/presentation/signup_screen/binding/signup_screen_binding.dart';
 import 'package:servical/presentation/signup_screen/signup_screen.dart';
 import 'package:servical/presentation/user_dashboard_screen/binding/user_dashboard_screen_binding.dart';
 import 'package:servical/presentation/user_dashboard_screen/user_dashboard_screen.dart';
+import 'package:servical/presentation/write_patient_notes_screen/binding/write_patient_notes_screen_binding.dart';
+import 'package:servical/presentation/write_patient_notes_screen/write_patients_notes_screen.dart';
 
 import '../presentation/doctor_dashboard_screen/binding/doctor_dashboard_screen_binding.dart';
 import '../presentation/doctor_dashboard_screen/doctor_dashboard_screen.dart';
@@ -69,10 +75,38 @@ class AppRoutes {
 
   static String patientNotesRoute = '/patientNotesRoute';
 
+  static String writepatientNotesRoute = '/writepatientNotesRoute';
+
+  static String profileRoute = '/profileRoute';
+
   //USER
   static String userDashboadRoute = '/userDashboardRoute';
 
+  //ABOUT
+  static String aboutRoute = '/aboutRoute';
+
   static List<GetPage> pages = [
+    GetPage(
+      name: aboutRoute,
+      page: () => AboutScreen(),
+      bindings: [
+        AboutScreenBinding(),
+      ],
+    ),
+    GetPage(
+      name: profileRoute,
+      page: () => ProfileScreen(),
+      bindings: [
+        ProfileScreenBinding(),
+      ],
+    ),
+    GetPage(
+      name: writepatientNotesRoute,
+      page: () => WritePatientsNotes(),
+      bindings: [
+        WritePatientNotesBinding(),
+      ],
+    ),
     GetPage(
       name: patientNotesRoute,
       page: () => PatientsNotes(),

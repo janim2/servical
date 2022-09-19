@@ -14,6 +14,18 @@ class PatientsNotes extends StatefulWidget {
 }
 
 class _PatientsNotesState extends State<PatientsNotes> {
+  String name = "";
+  String note = "";
+  String date = "";
+
+  @override
+  void initState() {
+    name = Get.parameters['name'].toString();
+    note = Get.parameters['note'].toString();
+    date = Get.parameters['date'].toString();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +69,7 @@ class _PatientsNotesState extends State<PatientsNotes> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "John Doe",
+                          name,
                           style: TextStyle(
                               fontFamily: "Sora",
                               fontSize: 20,
@@ -68,7 +80,7 @@ class _PatientsNotesState extends State<PatientsNotes> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "10th September, 2020",
+                          date,
                           style: TextStyle(
                               fontFamily: "Sora",
                               fontSize: 11,
@@ -81,7 +93,7 @@ class _PatientsNotesState extends State<PatientsNotes> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Lorem lorem n publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without",
+                          note,
                           style: TextStyle(
                               color: ColorConstant.primary, fontFamily: "Sora"),
                         ),

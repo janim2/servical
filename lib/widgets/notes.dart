@@ -29,6 +29,7 @@ class Notes extends StatelessWidget {
             children: [
               Text(
                 text,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                     color: ColorConstant.primary,
                     fontFamily: "Sora",

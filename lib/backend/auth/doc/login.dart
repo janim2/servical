@@ -81,6 +81,7 @@ saveToPrefs(SharedPreferences prefs, DocumentSnapshot documentSnapshot) {
   prefs.setString("user_id", documentSnapshot.get("user_id"));
   prefs.setString("phonenumber", documentSnapshot.get("phone"));
   prefs.setString("hospital", documentSnapshot.get("hospital"));
+  prefs.setString("email", documentSnapshot.get("email"));
 
   prefs.setString("isVerified", documentSnapshot.get("isVerified").toString());
   prefs.setString("userType", documentSnapshot.get("user_type"));

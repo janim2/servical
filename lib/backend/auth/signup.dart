@@ -58,6 +58,7 @@ addUser(String profile_image, String user_id, String username, String email,
     "user_id": user_id,
     "username": username,
     "phone": phone,
+    "fullname": "",
     "user_type": "user",
     "email": email,
   };

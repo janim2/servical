@@ -76,7 +76,7 @@ class _UserDoctorsState extends State<UserDoctors> {
                                     TextStyle(fontFamily: "Sora", fontSize: 15),
                               );
                             }
-
+                            print(snapshots.data!.docs.length == 0);
                             if (snapshots.data!.docs.length == 0) {
                               return Text("No available doctors",
                                   style: TextStyle(

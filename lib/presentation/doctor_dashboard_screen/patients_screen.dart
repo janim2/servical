@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:servical/widgets/chats.dart';
@@ -63,22 +64,66 @@ class _PatientsState extends State<Patients> {
                   margin: EdgeInsets.only(left: 30, right: 30),
                   child: Column(
                     children: [
-                      Chats(
-                        image: "assets/images/profile.png",
-                        drname: "Mr. Amoah",
-                        hospital_name: "Breast Examination",
-                        ontap: () {
-                          Get.toNamed(AppRoutes.patientInfoRoute);
-                        },
-                      ),
-                      Chats(
-                        image: "assets/images/profile.png",
-                        drname: "Mr. Amoah",
-                        hospital_name: "Breast Examination",
-                        ontap: () {
-                          Get.toNamed(AppRoutes.doctorInfoRoute);
-                        },
-                      ),
+                      StreamBuilder(
+                          stream: FirebaseFirestore.instance
+                              .collection("users")
+                              .snapshots(),
+                          builder: (builder,
+                              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                                  snapshots) {
+                            var dataRef = snapshots.data;
+
+                            if (snapshots.hasError) {
+                              return Text('Something went wrong');
+                            }
+
+                            if (snapshots.connectionState ==
+                                ConnectionState.waiting) {
+                              return Text(
+                                "Loading",
+                                style:
+                                    TextStyle(fontFamily: "Sora", fontSize: 15),
+                              );
+                            }
+
+                            if (snapshots.data!.docs.length == 0) {
+                              return Text("No users",
+                                  style: TextStyle(
+                                      fontFamily: "Sora", fontSize: 18));
+                            }
+
+                            return Column(
+                              children: [
+                                for (int k = 0;
+                                    k <= snapshots.data!.docs.length - 1;
+                                    k++)
+                                  Container(
+                                    child: Chats(
+                                      image: "assets/images/profile.png",
+                                      drname: dataRef?.docs[k]['username'],
+                                      hospital_name: dataRef?.docs[k]['email'],
+                                      ontap: () {
+                                        String name =
+                                            dataRef?.docs[k]['fullname'] == ""
+                                                ? dataRef?.docs[k]['username']
+                                                : dataRef?.docs[k]['fullname'];
+                                        String phone =
+                                            dataRef?.docs[k]['phone'];
+                                        String user_id =
+                                            dataRef?.docs[k]['user_id'];
+                                        var data = {
+                                          "name": name,
+                                          "phone": phone,
+                                          "user_id": user_id
+                                        };
+                                        Get.toNamed(AppRoutes.patientInfoRoute,
+                                            parameters: data);
+                                      },
+                                    ),
+                                  ),
+                              ],
+                            );
+                          }),
                     ],
                   ),
                 ),

@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:servical/widgets/notes.dart';
 import 'package:unicons/unicons.dart';
 
 import '../../core/app_export.dart';
+import '../../core/helpers/functions.dart';
 
 class PatientInfo extends StatefulWidget {
   const PatientInfo({Key? key}) : super(key: key);
@@ -14,12 +16,29 @@ class PatientInfo extends StatefulWidget {
 
 class _PatientInfoState extends State<PatientInfo> {
   bool status = false;
+  String name = "";
+  String phone = "";
+  String user_id = "";
+
+  @override
+  void initState() {
+    name = Get.parameters['name'].toString();
+    phone = Get.parameters['phone'].toString();
+    user_id = Get.parameters['user_id'].toString();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          var data = {
+            "name": name,
+            "user_id": user_id,
+          };
+          Get.toNamed(AppRoutes.writepatientNotesRoute, parameters: data);
+        },
         backgroundColor: ColorConstant.primary,
         child: const Icon(Icons.add),
       ),
@@ -102,7 +121,7 @@ class _PatientInfoState extends State<PatientInfo> {
                         child: Column(
                       children: [
                         Text(
-                          "Mr. John Doe",
+                          name,
                           style: TextStyle(
                               color: ColorConstant.primary,
                               fontFamily: "Sora",
@@ -138,30 +157,87 @@ class _PatientInfoState extends State<PatientInfo> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(
-                              UniconsLine.facebook_f,
-                              size: 35,
-                              color: ColorConstant.primary,
-                            ),
-                            Icon(
-                              UniconsLine.whatsapp,
-                              size: 35,
-                              color: ColorConstant.primary,
+                            // Icon(
+                            //   UniconsLine.facebook_f,
+                            //   size: 35,
+                            //   color: ColorConstant.primary,
+                            // ),
+                            InkWell(
+                              onTap: () {
+                                launchWhatsapp(context, phone);
+                              },
+                              child: Icon(
+                                UniconsLine.whatsapp,
+                                size: 35,
+                                color: ColorConstant.primary,
+                              ),
                             )
                           ],
                         ),
                       ],
                     ))),
-                Notes(
-                  text:
-                      "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without ...",
-                  ontap: () {
-                    Get.toNamed(AppRoutes.patientNotesRoute);
-                  },
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Text(
+                    "Notes",
+                    style: TextStyle(
+                        color: Colors.black, fontFamily: "Sora", fontSize: 14),
+                  ),
                 ),
-                Notes(
-                    text:
-                        "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface  ...")
+                StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection("notes")
+                        .snapshots(),
+                    builder: (builder,
+                        AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                            snapshots) {
+                      var dataRef = snapshots.data;
+
+                      if (snapshots.hasError) {
+                        return Text('Something went wrong');
+                      }
+
+                      if (snapshots.connectionState ==
+                          ConnectionState.waiting) {
+                        return Text(
+                          "Loading",
+                          style: TextStyle(fontFamily: "Sora", fontSize: 15),
+                        );
+                      }
+
+                      if (snapshots.data!.docs.length == 0) {
+                        return Text("No notes",
+                            style: TextStyle(fontFamily: "Sora", fontSize: 18));
+                      }
+
+                      return Column(
+                        children: [
+                          for (int k = 0;
+                              k <= snapshots.data!.docs.length - 1;
+                              k++)
+                            if (dataRef?.docs[k]['user_id'] == user_id)
+                              Container(
+                                child: Notes(
+                                  text: dataRef?.docs[k]['notes'],
+                                  ontap: () {
+                                    String notes = dataRef?.docs[k]['notes'];
+                                    Timestamp date = dataRef?.docs[k]['date'];
+                                    String thedate =
+                                        dateFormat(date).toString();
+                                    var data = {
+                                      "name": name,
+                                      "user_id": user_id,
+                                      "note": notes,
+                                      "date": thedate
+                                    };
+                                    Get.toNamed(AppRoutes.patientNotesRoute,
+                                        parameters: data);
+                                  },
+                                ),
+                              ),
+                        ],
+                      );
+                    }),
               ],
             ),
           ),

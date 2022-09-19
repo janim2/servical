@@ -26,11 +26,11 @@ class SplashScreenController extends GetxController {
     var isVerified = prefs.getString("isVerified");
     var user_id = prefs.getString("user_id");
 
-    print(hasOnboarded);
-    print(hasLogedin);
-    print(userType);
-    print(isVerified);
-    print(user_id);
+    // print(hasOnboarded);
+    // print(hasLogedin);
+    // print(userType);
+    // print(isVerified);
+    // print(user_id);
 
     var _duration = new Duration(seconds: 4);
     return Timer(_duration, () {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:servical/backend/auth/logout.dart';
 import 'package:servical/widgets/bordered_button.dart';
 import 'package:servical/widgets/button.dart';
 
@@ -61,18 +62,37 @@ class _DocSettingsState extends State<DocSettings> {
                     ),
                   ],
                 ),
-                SizedBox(height: 50,),
+                SizedBox(
+                  height: 50,
+                ),
                 Container(
                   margin: EdgeInsets.all(20),
                   child: Column(
                     children: [
-                      // BoardedButton(textonButton: "Recent Appointments"),
+                      BoardedButton(
+                        textonButton: "Profile",
+                        ontap: () {
+                          Get.toNamed(AppRoutes.profileRoute);
+                        },
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      BoardedButton(
+                        textonButton: "About",
+                        ontap: () {
+                          Get.toNamed(AppRoutes.aboutRoute);
+                        },
+                      ),
                       SizedBox(
                         height: 30,
                       ),
                       DefaultButton(
                         textonButton: "Logout",
                         color: Colors.red,
+                        ontap: () {
+                          Logout(context);
+                        },
                       )
                     ],
                   ),

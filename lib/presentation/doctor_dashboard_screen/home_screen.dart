@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
@@ -102,10 +103,50 @@ class _DoctorHomeState extends State<DoctorHome> {
                     ),
                   ),
                 ),
-                Appointments(
-                    image: "assets/images/profile.png",
-                    drname: "Mr. Henry",
-                    purpose_of_appointment: "Breast Examination")
+                StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection("appointments")
+                        .snapshots(),
+                    builder: (builder,
+                        AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                            snapshots) {
+                      var dataRef = snapshots.data;
+
+                      if (snapshots.hasError) {
+                        return Text('Something went wrong');
+                      }
+
+                      if (snapshots.connectionState ==
+                          ConnectionState.waiting) {
+                        return Text(
+                          "Loading",
+                          style: TextStyle(fontFamily: "Sora", fontSize: 15),
+                        );
+                      }
+
+                      if (snapshots.data!.docs.length == 0) {
+                        return Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Text("No appointment",
+                              style:
+                                  TextStyle(fontFamily: "Sora", fontSize: 18)),
+                        );
+                      }
+
+                      return Column(
+                        children: [
+                          for (int k = 0;
+                              k <= snapshots.data!.docs.length - 1;
+                              k++)
+                            Container(
+                                child: Appointments(
+                                    image: "assets/images/profile.png",
+                                    drname: "Mr. Henry",
+                                    purpose_of_appointment:
+                                        "Breast Examination")),
+                        ],
+                      );
+                    }),
               ],
             ),
           ),

@@ -62,6 +62,7 @@ class _DoctorNotVerifiedScreenState extends State<DoctorNotVerifiedScreen> {
                             Image.asset(
                               "assets/images/logo.png",
                               // fit: BoxFit.contain,
+                              height: 200,
                               width: size.width,
                             ),
                           ],

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:servical/widgets/appointments.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../backend/availability/make_doctor_available.dart';
 import '../../core/app_export.dart';
 
 class DoctorHome extends StatefulWidget {
@@ -15,6 +17,12 @@ class DoctorHome extends StatefulWidget {
 
 class _DoctorHomeState extends State<DoctorHome> {
   var status = false;
+
+  @override
+  void initState() {
+    fetchStatus();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,12 +104,24 @@ class _DoctorHomeState extends State<DoctorHome> {
                           onToggle: (val) {
                             setState(() {
                               status = val;
+                              isAvailable(context, status: status);
                             });
                           },
                         ),
                       ],
                     ),
                   ),
+                ),
+                Center(
+                  child: Text(
+                    "Put this on to indicate to patients that you are ready to attend to them",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontFamily: "Sora", fontSize: 13, color: Colors.black),
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
                 ),
                 StreamBuilder(
                     stream: FirebaseFirestore.instance
@@ -153,5 +173,20 @@ class _DoctorHomeState extends State<DoctorHome> {
         ),
       ),
     );
+  }
+
+  Future<void> fetchStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var stat = prefs.getString("isAvailable");
+
+    if (stat == "0") {
+      setState(() {
+        status = false;
+      });
+    } else {
+      setState(() {
+        status = true;
+      });
+    }
   }
 }

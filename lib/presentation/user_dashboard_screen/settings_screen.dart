@@ -76,8 +76,18 @@ class _UserSettingsState extends State<UserSettings> {
                     margin: EdgeInsets.all(20),
                     child: Column(
                       children: [
-                        BoardedButton(textonButton: "Recent Appointments"),
-                        BoardedButton(textonButton: "About"),
+                        BoardedButton(
+                          textonButton: "Profile",
+                          ontap: () {
+                            Get.toNamed(AppRoutes.userProfileRoute);
+                          },
+                        ),
+                        BoardedButton(
+                          textonButton: "About",
+                          ontap: () {
+                            Get.toNamed(AppRoutes.aboutRoute);
+                          },
+                        ),
                         SizedBox(
                           height: 30,
                         ),

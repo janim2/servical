@@ -92,11 +92,27 @@ class _UserDoctorsState extends State<UserDoctors> {
                                     Container(
                                       child: Chats(
                                         image: "assets/images/doctor.png",
-                                        drname: "Jesse Anim",
-                                        hospital_name: "Aponfo Anokye Hospital",
+                                        drname: dataRef?.docs[k]['fullname'],
+                                        hospital_name: dataRef?.docs[k]
+                                            ['hospital'],
                                         ontap: () {
-                                          Get.toNamed(
-                                              AppRoutes.doctorInfoRoute);
+                                          String name =
+                                              dataRef?.docs[k]['fullname'];
+                                          String hospital =
+                                              dataRef?.docs[k]['hospital'];
+                                          String phone =
+                                              dataRef?.docs[k]['phone'];
+                                          String user_id =
+                                              dataRef?.docs[k]['user_id'];
+
+                                          var data = {
+                                            "name": name,
+                                            "hospital": hospital,
+                                            "phone": phone,
+                                            "user_id": user_id,
+                                          };
+                                          Get.toNamed(AppRoutes.doctorInfoRoute,
+                                              parameters: data);
                                         },
                                       ),
                                     ),

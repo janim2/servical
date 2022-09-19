@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:servical/presentation/about_screen/about_screen.dart';
 import 'package:servical/presentation/about_screen/binding/about_screen_binding.dart';
+import 'package:servical/presentation/appointment_info_screen/appointment_info.dart';
+import 'package:servical/presentation/appointment_info_screen/controller/apoointment_info_screen_controller.dart';
 import 'package:servical/presentation/doctor_info_screen/binding/doctor_info_screen_binding.dart';
 import 'package:servical/presentation/doctor_info_screen/doctor_info.dart';
 import 'package:servical/presentation/doctor_login_screen/binding/doctor_login_screen_binding.dart';
@@ -27,9 +29,13 @@ import 'package:servical/presentation/signup_screen/binding/signup_screen_bindin
 import 'package:servical/presentation/signup_screen/signup_screen.dart';
 import 'package:servical/presentation/user_dashboard_screen/binding/user_dashboard_screen_binding.dart';
 import 'package:servical/presentation/user_dashboard_screen/user_dashboard_screen.dart';
+import 'package:servical/presentation/user_profile_screen/user_profile_screen.dart';
+import 'package:servical/presentation/verify_a_doc_screen/binding/verify_a_doc_screen_binding.dart';
+import 'package:servical/presentation/verify_a_doc_screen/verify_a_doc_screen.dart';
 import 'package:servical/presentation/write_patient_notes_screen/binding/write_patient_notes_screen_binding.dart';
 import 'package:servical/presentation/write_patient_notes_screen/write_patients_notes_screen.dart';
 
+import '../presentation/appointment_info_screen/binding/appointment_info_screen_binding.dart';
 import '../presentation/doctor_dashboard_screen/binding/doctor_dashboard_screen_binding.dart';
 import '../presentation/doctor_dashboard_screen/doctor_dashboard_screen.dart';
 import '../presentation/forgot_password_screen/binding/forgot_password_screen_binding.dart';
@@ -37,6 +43,7 @@ import '../presentation/login_screen/binding/login_screen_binding.dart';
 import '../presentation/login_screen/login_screen.dart';
 import '../presentation/splash_screen/binding/splash_screen_binding.dart';
 import '../presentation/splash_screen/splash_screen.dart';
+import '../presentation/user_profile_screen/binding/user_profile_screen_binding.dart';
 
 class AppRoutes {
   //ONBOARDING
@@ -79,13 +86,41 @@ class AppRoutes {
 
   static String profileRoute = '/profileRoute';
 
+  static String appointmentInfoRoute = '/appointmentInfoRoute';
+
   //USER
   static String userDashboadRoute = '/userDashboardRoute';
+
+  static String userProfileRoute = '/userProfileRoute';
 
   //ABOUT
   static String aboutRoute = '/aboutRoute';
 
+  //APPROVE A DOC
+  static String approveDocRoute = '/approveDocRoute';
+
   static List<GetPage> pages = [
+    GetPage(
+      name: approveDocRoute,
+      page: () => VerifyADocScreen(),
+      bindings: [
+        VerifyADocScreenBinding(),
+      ],
+    ),
+    GetPage(
+      name: appointmentInfoRoute,
+      page: () => AppointmentInfo(),
+      bindings: [
+        ApointmentInfoBinding(),
+      ],
+    ),
+    GetPage(
+      name: userProfileRoute,
+      page: () => UserProfile(),
+      bindings: [
+        UserProfileScreenBinding(),
+      ],
+    ),
     GetPage(
       name: aboutRoute,
       page: () => AboutScreen(),

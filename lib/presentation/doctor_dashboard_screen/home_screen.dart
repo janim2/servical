@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
@@ -7,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../backend/availability/make_doctor_available.dart';
 import '../../core/app_export.dart';
+import '../../core/helpers/functions.dart';
 
 class DoctorHome extends StatefulWidget {
   const DoctorHome({Key? key}) : super(key: key);
@@ -17,6 +19,7 @@ class DoctorHome extends StatefulWidget {
 
 class _DoctorHomeState extends State<DoctorHome> {
   var status = false;
+  final User? currentUser = FirebaseAuth.instance.currentUser;
 
   @override
   void initState() {
@@ -126,6 +129,7 @@ class _DoctorHomeState extends State<DoctorHome> {
                 StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection("appointments")
+                        .orderBy("date", descending: false)
                         .snapshots(),
                     builder: (builder,
                         AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
@@ -158,12 +162,34 @@ class _DoctorHomeState extends State<DoctorHome> {
                           for (int k = 0;
                               k <= snapshots.data!.docs.length - 1;
                               k++)
-                            Container(
-                                child: Appointments(
-                                    image: "assets/images/profile.png",
-                                    drname: "Mr. Henry",
-                                    purpose_of_appointment:
-                                        "Breast Examination")),
+                            if (dataRef?.docs[k]['doctor_id'] ==
+                                currentUser!.uid.toString())
+                              Container(
+                                  child: Appointments(
+                                image: "assets/images/doctor.png",
+                                drname: dataRef?.docs[k]['patient_name'],
+                                purpose_of_appointment: dataRef?.docs[k]
+                                    ['purpose'],
+                                date: dataRef?.docs[k]['date'],
+                                ontap: () {
+                                  String patient_name =
+                                      dataRef?.docs[k]['patient_name'];
+                                  String patient_id =
+                                      dataRef?.docs[k]['patient_id'];
+                                  String purpose = dataRef?.docs[k]['purpose'];
+                                  String date =
+                                      dateFormat(dataRef?.docs[k]['date'])
+                                          .toString();
+                                  var data = {
+                                    "name": patient_name,
+                                    "date": date,
+                                    "patient_id": patient_id,
+                                    "purpose": purpose
+                                  };
+                                  Get.toNamed(AppRoutes.appointmentInfoRoute,
+                                      parameters: data);
+                                },
+                              )),
                         ],
                       );
                     }),

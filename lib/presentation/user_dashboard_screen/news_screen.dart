@@ -58,14 +58,20 @@ class _UserNewsState extends State<UserNews> {
                         Column(
                           children: [
                             WhiteCircularImage(
-                                image: "assets/images/news/who.png"),
+                              image: "assets/images/news/who.png",
+                              org_name: "WHO",
+                              link: "https://www.who.int/",
+                            ),
                             WhiteCircularImage(
-                                image: "assets/images/news/bbc.png"),
+                              image: "assets/images/news/bbc.png",
+                              org_name: "BBC",
+                              link: "https://www.bbc.co.uk/news/health",
+                            ),
                           ],
                         ),
                         Container(
                             margin: EdgeInsets.all(5),
-                            width:2,
+                            width: 2,
                             height: 300,
                             decoration: BoxDecoration(
                               color: ColorConstant.primary,
@@ -77,9 +83,16 @@ class _UserNewsState extends State<UserNews> {
                         Column(
                           children: [
                             WhiteCircularImage(
-                                image: "assets/images/news/cnn.png"),
+                              image: "assets/images/news/cnn.png",
+                              org_name: "CNN",
+                              link: "https://www.cnn.com/health",
+                            ),
                             WhiteCircularImage(
-                                image: "assets/images/news/science_daily.png")
+                              image: "assets/images/news/science_daily.png",
+                              org_name: "Science Daily",
+                              link:
+                                  "https://www.sciencedaily.com/news/top/health/",
+                            )
                           ],
                         )
                       ],

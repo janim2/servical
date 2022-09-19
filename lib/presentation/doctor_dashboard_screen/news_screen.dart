@@ -57,15 +57,15 @@ class _UserNewsState extends State<UserNews> {
                       children: [
                         Column(
                           children: [
-                            WhiteCircularImage(
-                                image: "assets/images/news/who.png"),
-                            WhiteCircularImage(
-                                image: "assets/images/news/bbc.png"),
+                            // WhiteCircularImage(
+                            //     image: "assets/images/news/who.png"),
+                            // WhiteCircularImage(
+                            //     image: "assets/images/news/bbc.png"),
                           ],
                         ),
                         Container(
                             margin: EdgeInsets.all(5),
-                            width:2,
+                            width: 2,
                             height: 300,
                             decoration: BoxDecoration(
                               color: ColorConstant.primary,
@@ -76,10 +76,10 @@ class _UserNewsState extends State<UserNews> {
                             child: Text('')),
                         Column(
                           children: [
-                            WhiteCircularImage(
-                                image: "assets/images/news/cnn.png"),
-                            WhiteCircularImage(
-                                image: "assets/images/news/science_daily.png")
+                            // WhiteCircularImage(
+                            //     image: "assets/images/news/cnn.png"),
+                            // WhiteCircularImage(
+                            //     image: "assets/images/news/science_daily.png")
                           ],
                         )
                       ],

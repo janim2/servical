@@ -75,9 +75,6 @@ class _DocSettingsState extends State<DocSettings> {
                           Get.toNamed(AppRoutes.profileRoute);
                         },
                       ),
-                      SizedBox(
-                        height: 30,
-                      ),
                       BoardedButton(
                         textonButton: "About",
                         ontap: () {

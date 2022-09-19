@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:servical/core/helpers/functions.dart';
 
 import '../core/app_export.dart';
 
@@ -7,6 +9,7 @@ class Appointments extends StatelessWidget {
   String image;
   String drname;
   String purpose_of_appointment;
+  Timestamp date;
   final ontap;
 
   // ignore: sort_constructors_first
@@ -14,6 +17,7 @@ class Appointments extends StatelessWidget {
       {required this.image,
       required this.drname,
       required this.purpose_of_appointment,
+      required this.date,
       this.ontap});
 
   @override
@@ -21,9 +25,9 @@ class Appointments extends StatelessWidget {
     return InkWell(
       onTap: ontap,
       child: Container(
-          margin: EdgeInsets.all(25),
+          margin: EdgeInsets.all(15),
           width: size.width,
-          height: 60,
+          height: 80,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(
               Radius.circular(50.0),
@@ -49,34 +53,34 @@ class Appointments extends StatelessWidget {
                   ),
                   Text(
                     purpose_of_appointment,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 13,
                         color: ColorConstant.primary,
                         fontFamily: "Sora"),
                   ),
+                  Container(
+                      padding: EdgeInsets.all(3),
+                      decoration: BoxDecoration(
+                        color: ColorConstant.primary,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(50.0),
+                        ),
+                      ),
+                      child: Center(
+                          child: Text(
+                        dateFormat(date),
+                        style: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            fontFamily: "Sora",
+                            fontSize: 12,
+                            color: ColorConstant.white),
+                      ))),
                 ],
               ),
               SizedBox(
                 width: 10,
               ),
-              Container(
-                  margin: EdgeInsets.all(5),
-                  padding: EdgeInsets.all(3),
-                  height: 25,
-                  decoration: BoxDecoration(
-                    color: ColorConstant.primary,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(50.0),
-                    ),
-                  ),
-                  child: Center(
-                      child: Text(
-                    "1st January",
-                    style: TextStyle(
-                        fontFamily: "Sora",
-                        fontSize: 13,
-                        color: ColorConstant.white),
-                  ))),
             ],
           )),
     );

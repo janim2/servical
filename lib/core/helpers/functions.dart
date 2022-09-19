@@ -47,3 +47,17 @@ String getAutoId() {
   }
   return buffer.toString();
 }
+
+fetchUserPhone(String user_id) async {
+  try {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user_id)
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      return documentSnapshot.get("phone").toString();
+    });
+  } on FormatException catch (e) {
+    return e;
+  }
+}

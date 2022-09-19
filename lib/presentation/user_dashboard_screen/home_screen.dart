@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:servical/widgets/appointments.dart';
 
 import '../../core/app_export.dart';
+import '../../core/helpers/functions.dart';
 import '../../widgets/chats.dart';
 
 class UserHome extends StatefulWidget {
@@ -73,7 +74,8 @@ class _UserHomeState extends State<UserHome> {
                 ),
                 StreamBuilder(
                     stream: FirebaseFirestore.instance
-                        .collection("apointments")
+                        .collection("appointments")
+                        .orderBy("date", descending: false)
                         .snapshots(),
                     builder: (builder,
                         AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
@@ -96,7 +98,8 @@ class _UserHomeState extends State<UserHome> {
                         return Padding(
                           padding: const EdgeInsets.all(29.0),
                           child: Text("No appointments",
-                              style: TextStyle(fontFamily: "Sora", fontSize: 18)),
+                              style:
+                                  TextStyle(fontFamily: "Sora", fontSize: 18)),
                         );
                       }
 
@@ -105,14 +108,15 @@ class _UserHomeState extends State<UserHome> {
                           for (int k = 0;
                               k <= snapshots.data!.docs.length - 1;
                               k++)
-                            if (dataRef?.docs[k]['user_id'] ==
+                            if (dataRef?.docs[k]['patient_id'] ==
                                 currentUser!.uid.toString())
                               Container(
                                   child: Appointments(
                                       image: "assets/images/doctor.png",
-                                      drname: "Dr. John Doe",
-                                      purpose_of_appointment:
-                                          "Breast Examination")),
+                                      drname: dataRef?.docs[k]['doc_name'],
+                                      purpose_of_appointment: dataRef?.docs[k]
+                                          ['purpose'],
+                                      date: dataRef?.docs[k]['date'])),
                         ],
                       );
                     }),

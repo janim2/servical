@@ -2,7 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:servical/widgets/toast.dart';
 
-import '../../backend/auth/signup.dart';
+import '../../backend/auth/user/signup.dart';
 import '../../widgets/button.dart';
 import 'controller/signup_screen_controller.dart';
 import 'package:flutter/material.dart';

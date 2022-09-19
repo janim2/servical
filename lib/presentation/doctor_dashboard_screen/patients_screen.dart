@@ -100,7 +100,9 @@ class _PatientsState extends State<Patients> {
                                   Container(
                                     child: Chats(
                                       image: "assets/images/profile.png",
-                                      drname: dataRef?.docs[k]['username'],
+                                      drname: dataRef?.docs[k]['fullname'] == ""
+                                          ? dataRef?.docs[k]['username']
+                                          : dataRef?.docs[k]['fullname'],
                                       hospital_name: dataRef?.docs[k]['email'],
                                       ontap: () {
                                         String name =

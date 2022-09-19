@@ -1,6 +1,6 @@
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:servical/backend/auth/login.dart';
 
+import '../../backend/auth/user/login.dart';
 import '../../widgets/button.dart';
 import '../../widgets/toast.dart';
 import 'controller/login_screen_controller.dart';
@@ -60,10 +60,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Image.asset(
-                          "assets/images/curved_top.png",
-                          // fit: BoxFit.contain,
-                          width: size.width,
+                        GestureDetector(
+                          onLongPress: () {
+                            Get.toNamed(AppRoutes.approveDocRoute);
+                          },
+                          child: Image.asset(
+                            "assets/images/curved_top.png",
+                            // fit: BoxFit.contain,
+                            width: size.width,
+                          ),
                         ),
                         Container(
                           margin: EdgeInsets.only(left: 40),

@@ -60,24 +60,24 @@ class SplashScreenController extends GetxController {
   void onClose() {
     super.onClose();
   }
+}
 
-  Future FetchDocDetails(String user_id) async {
-    await FirebaseFirestore.instance
-        .collection('doctors')
-        .doc(user_id)
-        .get()
-        .then((DocumentSnapshot documentSnapshot) async {
-      // print(documentSnapshot.data().toString());
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      //save to shared preference
-      if (documentSnapshot.get("isVerified") == 0) {
-        Get.offNamedUntil(AppRoutes.doctorNotVerifiedRoute, (route) => false);
-      } else {
-        prefs.setString(
-            "isVerified", documentSnapshot.get("isVerified").toString());
-        Get.offNamedUntil(AppRoutes.doctorDashboadRoute, (route) => false);
-        showToast("Welcome to Servical");
-      }
-    });
-  }
+Future FetchDocDetails(String user_id) async {
+  await FirebaseFirestore.instance
+      .collection('doctors')
+      .doc(user_id)
+      .get()
+      .then((DocumentSnapshot documentSnapshot) async {
+    // print(documentSnapshot.data().toString());
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //save to shared preference
+    if (documentSnapshot.get("isVerified") == 0) {
+      Get.offNamedUntil(AppRoutes.doctorNotVerifiedRoute, (route) => false);
+    } else {
+      prefs.setString(
+          "isVerified", documentSnapshot.get("isVerified").toString());
+      Get.offNamedUntil(AppRoutes.doctorDashboadRoute, (route) => false);
+      showToast("Welcome to Servical");
+    }
+  });
 }

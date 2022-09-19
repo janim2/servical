@@ -1,10 +1,15 @@
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:servical/backend/auth/logout.dart';
+import 'package:servical/widgets/bordered_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../backend/auth/doc/signup.dart';
 import '../../widgets/button.dart';
 import '../../widgets/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:servical/core/app_export.dart';
+
+import '../splash_screen/controller/splash_screen_controller.dart';
 
 class DoctorNotVerifiedScreen extends StatefulWidget {
   const DoctorNotVerifiedScreen({Key? key}) : super(key: key);
@@ -110,6 +115,26 @@ class _DoctorNotVerifiedScreenState extends State<DoctorNotVerifiedScreen> {
                                         fontSize: 20,
                                         color: ColorConstant.white),
                                   ),
+                                ),
+                                SizedBox(
+                                  height: 25,
+                                ),
+                                BoardedButtonWhite(
+                                  textonButton: "Retry",
+                                  ontap: () async {
+                                    SharedPreferences prefs =
+                                        await SharedPreferences.getInstance();
+                                    startSpinner();
+                                    FetchDocDetails(
+                                        prefs.getString("user_id").toString());
+                                    stopSpinner();
+                                  },
+                                ),
+                                BoardedButtonWhite(
+                                  textonButton: "Login as new user",
+                                  ontap: () {
+                                    Logout(context);
+                                  },
                                 ),
                               ],
                             ))

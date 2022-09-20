@@ -34,20 +34,20 @@ class SplashScreenController extends GetxController {
 
     var _duration = new Duration(seconds: 4);
     return Timer(_duration, () {
-      // if (hasOnboarded != "true" && hasLogedin != "true") {
+      if (hasOnboarded != "true" && hasLogedin != "true") {
         Get.toNamed(AppRoutes.onboardingRoute);
-      // } else if (hasOnboarded == "true" && hasLogedin != "true") {
-      //   Get.toNamed(AppRoutes.loginRoute);
-      // } else if (hasOnboarded == "true" &&
-      //     hasLogedin == "true" &&
-      //     userType == "user") {
-      //   Get.toNamed(AppRoutes.userDashboadRoute);
-      // } else if (hasOnboarded == "true" &&
-      //     hasLogedin == "true" &&
-      //     userType == "doctor") {
-      //   //CHECK IF DOC IS VERIFIED
-      //   FetchDocDetails(user_id.toString());
-      // }
+      } else if (hasOnboarded == "true" && hasLogedin != "true") {
+        Get.toNamed(AppRoutes.loginRoute);
+      } else if (hasOnboarded == "true" &&
+          hasLogedin == "true" &&
+          userType == "user") {
+        Get.toNamed(AppRoutes.userDashboadRoute);
+      } else if (hasOnboarded == "true" &&
+          hasLogedin == "true" &&
+          userType == "doctor") {
+        //CHECK IF DOC IS VERIFIED
+        FetchDocDetails(user_id.toString());
+      }
     });
   }
 

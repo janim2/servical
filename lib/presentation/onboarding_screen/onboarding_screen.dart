@@ -52,7 +52,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               height: 100,
             ),
             Expanded(
-              flex: 4,
+              flex: 3,
               child: PageView.builder(
                 controller: _controller,
                 onPageChanged: (value) => setState(() => _currentPage = value),
@@ -66,10 +66,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         children: [
                           Image.asset(
                             contents[i].image,
-                            height: size.height / 2.7,
+                            height: size.height / 3,
                           ),
                           SizedBox(
-                            height: (size.height >= 840) ? 60 : 30,
+                            height: (size.height >= 840) ? 50 : 30,
                           ),
                           // Text(
                           //   contents[i].title,

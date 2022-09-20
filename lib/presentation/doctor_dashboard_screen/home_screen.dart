@@ -79,120 +79,130 @@ class _DoctorHomeState extends State<DoctorHome> {
                   height: 30,
                 ),
                 Container(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 0.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Appointments",
-                            style: TextStyle(
-                                fontFamily: "Sora",
-                                fontSize: 25,
-                                color: ColorConstant.primary),
-                          ),
+                  margin: EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 0.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                "Appointments",
+                                style: TextStyle(
+                                    fontFamily: "Sora",
+                                    fontSize: 25,
+                                    color: ColorConstant.primary),
+                              ),
+                            ),
+                            FlutterSwitch(
+                              width: 100.0,
+                              height: 40.0,
+                              valueFontSize: 20.0,
+                              toggleSize: 45.0,
+                              value: status,
+                              borderRadius: 30.0,
+                              padding: 8.0,
+                              activeColor: ColorConstant.primary,
+                              showOnOff: true,
+                              onToggle: (val) {
+                                setState(() {
+                                  status = val;
+                                  isAvailable(context, status: status);
+                                });
+                              },
+                            ),
+                          ],
                         ),
-                        FlutterSwitch(
-                          width: 100.0,
-                          height: 40.0,
-                          valueFontSize: 20.0,
-                          toggleSize: 45.0,
-                          value: status,
-                          borderRadius: 30.0,
-                          padding: 8.0,
-                          activeColor: ColorConstant.primary,
-                          showOnOff: true,
-                          onToggle: (val) {
-                            setState(() {
-                              status = val;
-                              isAvailable(context, status: status);
-                            });
-                          },
+                      ),
+                      Center(
+                        child: Text(
+                          "Put this on to indicate to patients that you are ready to attend to them",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontFamily: "Sora",
+                              fontSize: 13,
+                              color: Colors.black),
                         ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      StreamBuilder(
+                          stream: FirebaseFirestore.instance
+                              .collection("appointments")
+                              .orderBy("date", descending: false)
+                              .snapshots(),
+                          builder: (builder,
+                              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                                  snapshots) {
+                            var dataRef = snapshots.data;
+
+                            if (snapshots.hasError) {
+                              return Text('Something went wrong');
+                            }
+
+                            if (snapshots.connectionState ==
+                                ConnectionState.waiting) {
+                              return Text(
+                                "Loading",
+                                style:
+                                    TextStyle(fontFamily: "Sora", fontSize: 15),
+                              );
+                            }
+
+                            if (snapshots.data!.docs.length == 0) {
+                              return Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Text("No appointment",
+                                    style: TextStyle(
+                                        fontFamily: "Sora", fontSize: 18)),
+                              );
+                            }
+
+                            return Column(
+                              children: [
+                                for (int k = 0;
+                                    k <= snapshots.data!.docs.length - 1;
+                                    k++)
+                                  if (dataRef?.docs[k]['doctor_id'] ==
+                                      currentUser!.uid.toString())
+                                    Container(
+                                        child: Appointments(
+                                      image: "assets/images/doctor.png",
+                                      drname: dataRef?.docs[k]['patient_name'],
+                                      purpose_of_appointment: dataRef?.docs[k]
+                                          ['purpose'],
+                                      date: dataRef?.docs[k]['date'],
+                                      ontap: () {
+                                        String patient_name =
+                                            dataRef?.docs[k]['patient_name'];
+                                        String patient_id =
+                                            dataRef?.docs[k]['patient_id'];
+                                        String purpose =
+                                            dataRef?.docs[k]['purpose'];
+                                        String date =
+                                            dateFormat(dataRef?.docs[k]['date'])
+                                                .toString();
+                                        var data = {
+                                          "name": patient_name,
+                                          "date": date,
+                                          "patient_id": patient_id,
+                                          "purpose": purpose
+                                        };
+                                        Get.toNamed(
+                                            AppRoutes.appointmentInfoRoute,
+                                            parameters: data);
+                                      },
+                                    )),
+                              ],
+                            );
+                          }),
+                    ],
                   ),
                 ),
-                Center(
-                  child: Text(
-                    "Put this on to indicate to patients that you are ready to attend to them",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: "Sora", fontSize: 13, color: Colors.black),
-                  ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                StreamBuilder(
-                    stream: FirebaseFirestore.instance
-                        .collection("appointments")
-                        .orderBy("date", descending: false)
-                        .snapshots(),
-                    builder: (builder,
-                        AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
-                            snapshots) {
-                      var dataRef = snapshots.data;
-
-                      if (snapshots.hasError) {
-                        return Text('Something went wrong');
-                      }
-
-                      if (snapshots.connectionState ==
-                          ConnectionState.waiting) {
-                        return Text(
-                          "Loading",
-                          style: TextStyle(fontFamily: "Sora", fontSize: 15),
-                        );
-                      }
-
-                      if (snapshots.data!.docs.length == 0) {
-                        return Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Text("No appointment",
-                              style:
-                                  TextStyle(fontFamily: "Sora", fontSize: 18)),
-                        );
-                      }
-
-                      return Column(
-                        children: [
-                          for (int k = 0;
-                              k <= snapshots.data!.docs.length - 1;
-                              k++)
-                            if (dataRef?.docs[k]['doctor_id'] ==
-                                currentUser!.uid.toString())
-                              Container(
-                                  child: Appointments(
-                                image: "assets/images/doctor.png",
-                                drname: dataRef?.docs[k]['patient_name'],
-                                purpose_of_appointment: dataRef?.docs[k]
-                                    ['purpose'],
-                                date: dataRef?.docs[k]['date'],
-                                ontap: () {
-                                  String patient_name =
-                                      dataRef?.docs[k]['patient_name'];
-                                  String patient_id =
-                                      dataRef?.docs[k]['patient_id'];
-                                  String purpose = dataRef?.docs[k]['purpose'];
-                                  String date =
-                                      dateFormat(dataRef?.docs[k]['date'])
-                                          .toString();
-                                  var data = {
-                                    "name": patient_name,
-                                    "date": date,
-                                    "patient_id": patient_id,
-                                    "purpose": purpose
-                                  };
-                                  Get.toNamed(AppRoutes.appointmentInfoRoute,
-                                      parameters: data);
-                                },
-                              )),
-                        ],
-                      );
-                    }),
               ],
             ),
           ),

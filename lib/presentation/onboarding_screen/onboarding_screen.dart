@@ -32,7 +32,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         color: ColorConstant.primary,
       ),
       margin: const EdgeInsets.only(right: 5),
-      height: 10,
+      height: 5,
       curve: Curves.easeIn,
       width: _currentPage == index ? 20 : 10,
     );
@@ -89,7 +89,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               fontFamily: "Sora",
                               color: ColorConstant.primary,
                               fontWeight: FontWeight.w300,
-                              fontSize: (size.width <= 550) ? 17 : 25,
+                              fontSize: (size.width <= 550) ? 15 : 25,
                             ),
                             textAlign: TextAlign.center,
                           )
@@ -114,7 +114,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                   _currentPage + 1 == contents.length
                       ? Padding(
-                          padding: const EdgeInsets.all(30),
+                          padding: const EdgeInsets.all(20),
                           child: ElevatedButton(
                             onPressed: () {
                               addStringToSF("hasOnboarded", "true");
@@ -138,7 +138,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           ),
                         )
                       : Padding(
-                          padding: const EdgeInsets.all(30),
+                          padding: const EdgeInsets.all(20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [

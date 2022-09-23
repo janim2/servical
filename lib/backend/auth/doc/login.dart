@@ -15,7 +15,7 @@ Future<String?> DrLogin(BuildContext context,
 
   try {
     UserCredential result = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email, password: password);
+        .signInWithEmailAndPassword(email: email.replaceAll(" ", ""), password: password);
     assert(result != null);
     final User? currentUser = await FirebaseAuth.instance.currentUser;
     user_id = currentUser!.uid;

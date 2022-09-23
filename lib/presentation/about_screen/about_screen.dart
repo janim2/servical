@@ -109,7 +109,7 @@ class _AboutScreenState extends State<AboutScreen> {
                               Align(
                                 alignment: Alignment.center,
                                 child: Text(
-                                  "Isaac Kwaku Duah \n ",
+                                  "Isaac Kwaku Duah \n 3926318",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontFamily: "Sora",

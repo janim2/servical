@@ -36,7 +36,12 @@ class Appointments extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              ClipRect(child: Image.asset(image)),
+              ClipRect(
+                  child: Image.asset(
+                image,
+                height: 70,
+                width: 70,
+              )),
               SizedBox(
                 width: 10,
               ),
@@ -51,13 +56,16 @@ class Appointments extends StatelessWidget {
                         color: ColorConstant.primary,
                         fontFamily: "Sora"),
                   ),
-                  Text(
-                    purpose_of_appointment,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        fontSize: 13,
-                        color: ColorConstant.primary,
-                        fontFamily: "Sora"),
+                  SizedBox(
+                    width: size.width / 1.5,
+                    child: Text(
+                      purpose_of_appointment,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: 13,
+                          color: ColorConstant.primary,
+                          fontFamily: "Sora"),
+                    ),
                   ),
                   Container(
                       padding: EdgeInsets.all(3),

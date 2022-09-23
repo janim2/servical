@@ -56,7 +56,7 @@ class OTPScreen extends GetWidget<OTPScreenController> {
                             // _customTextFieldOTP(first: true, last: false),
                             Container(
                               height: 70,
-                              width: 70,
+                              width: 60,
                               child: TextField(
                                 controller: code_1Controller,
                                 autofocus: true,
@@ -100,7 +100,7 @@ class OTPScreen extends GetWidget<OTPScreenController> {
                             // _customTextFieldOTP(first: false, last: false),
                             Container(
                               height: 70,
-                              width: 70,
+                              width: 60,
                               child: TextField(
                                 controller: code_2Controller,
                                 autofocus: true,
@@ -145,7 +145,7 @@ class OTPScreen extends GetWidget<OTPScreenController> {
                             // _customTextFieldOTP(first: false, last: false),
                             Container(
                               height: 70,
-                              width: 70,
+                              width: 60,
                               child: TextField(
                                 controller: code_3Controller,
                                 autofocus: true,
@@ -190,7 +190,7 @@ class OTPScreen extends GetWidget<OTPScreenController> {
                             // _customTextFieldOTP(first: false, last: true),
                             Container(
                               height: 70,
-                              width: 70,
+                              width: 60,
                               child: TextField(
                                 controller: code_4Controller,
                                 autofocus: true,

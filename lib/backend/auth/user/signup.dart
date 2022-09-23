@@ -17,7 +17,7 @@ Future<String?> SignUp(BuildContext context,
 
   try {
     UserCredential result = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: email, password: password);
+        .createUserWithEmailAndPassword(email: email.replaceAll(" ", ""), password: password);
 
     user_id = result.user!.uid;
 

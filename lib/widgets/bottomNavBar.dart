@@ -44,7 +44,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       body: callPage(currentTab),
       bottomNavigationBar: BottomAppBar(
         child: Container(
-          height: MediaQuery.of(context).size.height * 1 / 10 - 20,
+          height: MediaQuery.of(context).size.height * 1 / 10,
           child: Row(
             // crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

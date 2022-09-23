@@ -46,7 +46,7 @@ class _DocBottomNavBarState extends State<DocBottomNavBar> {
       body: callPage(currentTab),
       bottomNavigationBar: BottomAppBar(
         child: Container(
-          height: MediaQuery.of(context).size.height * 1 / 10 - 20,
+          height: MediaQuery.of(context).size.height * 1 / 10, //- 20,
           child: Row(
             // crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

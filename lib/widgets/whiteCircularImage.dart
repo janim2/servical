@@ -23,8 +23,8 @@ class WhiteCircularImage extends StatelessWidget {
           children: [
             Container(
                 margin: EdgeInsets.all(5),
-                width: 100,
-                height: 100,
+                width: 75,
+                height: 75,
                 decoration: BoxDecoration(
                   color: ColorConstant.white,
                   borderRadius: BorderRadius.all(
@@ -32,12 +32,16 @@ class WhiteCircularImage extends StatelessWidget {
                   ),
                 ),
                 child: Center(
-                    child: Image.asset(
-                  image,
-                  fit: BoxFit.contain,
+                    child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset(
+                    image,
+                    fit: BoxFit.contain,
+                  ),
                 ))),
             Text(
               org_name,
+              textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: "Sora",
                   color: ColorConstant.primary,
@@ -54,5 +58,18 @@ _launchURL(String link) async {
     await launchUrl(url);
   } else {
     throw 'Could not launch $url';
+  }
+}
+
+_launchURL2(String link) async {
+  if (!await canLaunch(link)) {
+    await launch(
+      link,
+      forceSafariVC: false,
+      forceWebView: false,
+      headers: <String, String>{'my_header_key': 'my_header_value'},
+    );
+  } else {
+    throw 'Could not launch $link';
   }
 }

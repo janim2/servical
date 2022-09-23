@@ -57,7 +57,7 @@ class Appointments extends StatelessWidget {
                         fontFamily: "Sora"),
                   ),
                   SizedBox(
-                    width: size.width / 1.5,
+                    width: 200,
                     child: Text(
                       purpose_of_appointment,
                       overflow: TextOverflow.ellipsis,
@@ -81,7 +81,7 @@ class Appointments extends StatelessWidget {
                         style: TextStyle(
                             overflow: TextOverflow.ellipsis,
                             fontFamily: "Sora",
-                            fontSize: 12,
+                            fontSize: 11,
                             color: ColorConstant.white),
                       ))),
                 ],

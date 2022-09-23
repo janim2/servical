@@ -47,14 +47,17 @@ class Chats extends StatelessWidget {
                         color: ColorConstant.primary,
                         fontFamily: "Sora"),
                   ),
-                  Text(
-                    hospital_name,
-                    overflow: TextOverflow.fade,
-                    softWrap: false,
-                    style: TextStyle(
-                        fontSize: 15,
-                        color: ColorConstant.primary,
-                        fontFamily: "Sora"),
+                  SizedBox(
+                    width: 220,
+                    child: Text(
+                      hospital_name,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: false,
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: ColorConstant.primary,
+                          fontFamily: "Sora"),
+                    ),
                   ),
                 ],
               )

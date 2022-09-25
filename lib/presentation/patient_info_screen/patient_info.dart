@@ -102,7 +102,7 @@ class _PatientInfoState extends State<PatientInfo> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(300),
                     child: Image.asset(
-                      "assets/images/profile.png",
+                      "assets/images/avatar.jpg",
                       width: 100,
                       height: 100,
                     ),

@@ -61,7 +61,7 @@ class _AboutScreenState extends State<AboutScreen> {
                         child: Align(
                           alignment: Alignment.center,
                           child: Text(
-                            "Servical 1.0",
+                            "Survical 1.0",
                             style: TextStyle(
                                 fontFamily: "Sora",
                                 fontSize: 20,

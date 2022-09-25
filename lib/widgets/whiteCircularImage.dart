@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../core/app_export.dart';
+import '../core/helpers/functions.dart';
 
 class WhiteCircularImage extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables
@@ -17,7 +18,7 @@ class WhiteCircularImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
         onTap: () {
-          _launchURL(link);
+          LaunchURL(link);
         },
         child: Column(
           children: [
@@ -49,27 +50,5 @@ class WhiteCircularImage extends StatelessWidget {
             )
           ],
         ));
-  }
-}
-
-_launchURL(String link) async {
-  var url = Uri.parse(link);
-  if (await canLaunchUrl(url)) {
-    await launchUrl(url);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
-
-_launchURL2(String link) async {
-  if (!await canLaunch(link)) {
-    await launch(
-      link,
-      forceSafariVC: false,
-      forceWebView: false,
-      headers: <String, String>{'my_header_key': 'my_header_value'},
-    );
-  } else {
-    throw 'Could not launch $link';
   }
 }

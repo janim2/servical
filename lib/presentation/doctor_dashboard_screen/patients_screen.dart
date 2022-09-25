@@ -99,7 +99,7 @@ class _PatientsState extends State<Patients> {
                                     k++)
                                   Container(
                                     child: Chats(
-                                      image: "assets/images/profile.png",
+                                      image: "assets/images/avatar.jpg",
                                       drname: dataRef?.docs[k]['fullname'] == ""
                                           ? dataRef?.docs[k]['username']
                                           : dataRef?.docs[k]['fullname'],

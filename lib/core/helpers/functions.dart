@@ -21,6 +21,28 @@ launchWhatsapp(BuildContext context, String phone) async {
   }
 }
 
+LaunchURL(String link) async {
+  var url = Uri.parse(link);
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+_launchURL2(String link) async {
+  if (!await canLaunch(link)) {
+    await launch(
+      link,
+      forceSafariVC: false,
+      forceWebView: false,
+      headers: <String, String>{'my_header_key': 'my_header_value'},
+    );
+  } else {
+    throw 'Could not launch $link';
+  }
+}
+
 dateFormat(Timestamp the_date) {
   DateTime dt = (the_date).toDate();
   return DateFormat('EEEE, d MMM, yyyy').format(dt);

@@ -54,6 +54,21 @@ class _UserHomeState extends State<UserHome> {
                         ),
                       ),
                     ),
+                    InkWell(
+                      onTap: () {
+                        Get.toNamed(AppRoutes.videosRoute);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(25.0),
+                        child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Icon(
+                              Icons.video_collection,
+                              color: Colors.white,
+                              size: 35,
+                            )),
+                      ),
+                    ),
                   ],
                 ),
                 Container(

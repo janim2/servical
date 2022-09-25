@@ -23,7 +23,7 @@
     </queries>
     
    <application
-        android:label="servical"
+        android:label="survical"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

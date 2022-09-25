@@ -32,6 +32,8 @@ import 'package:servical/presentation/user_dashboard_screen/user_dashboard_scree
 import 'package:servical/presentation/user_profile_screen/user_profile_screen.dart';
 import 'package:servical/presentation/verify_a_doc_screen/binding/verify_a_doc_screen_binding.dart';
 import 'package:servical/presentation/verify_a_doc_screen/verify_a_doc_screen.dart';
+import 'package:servical/presentation/videos_screen/binding/videos_screen_binding.dart';
+import 'package:servical/presentation/videos_screen/videos_screen.dart';
 import 'package:servical/presentation/write_patient_notes_screen/binding/write_patient_notes_screen_binding.dart';
 import 'package:servical/presentation/write_patient_notes_screen/write_patients_notes_screen.dart';
 
@@ -93,6 +95,8 @@ class AppRoutes {
 
   static String userProfileRoute = '/userProfileRoute';
 
+  static String videosRoute = '/videosRoute';
+
   //ABOUT
   static String aboutRoute = '/aboutRoute';
 
@@ -100,6 +104,20 @@ class AppRoutes {
   static String approveDocRoute = '/approveDocRoute';
 
   static List<GetPage> pages = [
+    GetPage(
+      name: videosRoute,
+      page: () => VideosScreen(),
+      bindings: [
+        VideosScreenBinding(),
+      ],
+    ),
+    GetPage(
+      name: approveDocRoute,
+      page: () => VerifyADocScreen(),
+      bindings: [
+        VerifyADocScreenBinding(),
+      ],
+    ),
     GetPage(
       name: approveDocRoute,
       page: () => VerifyADocScreen(),
